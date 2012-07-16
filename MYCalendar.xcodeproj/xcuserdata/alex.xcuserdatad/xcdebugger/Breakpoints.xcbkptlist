@@ -7,53 +7,95 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DayView.m"
-         timestampString = "363790400.302991"
+         filePath = "MYCalendar/DayViewInformationSheet.m"
+         timestampString = "364136940.202142"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "23"
-         endingLineNumber = "23"
-         landmarkName = "-initWithFrame:"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-setTargetDate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "1"
+         condition = "[self oldInformationSheet] == nil"
+         continueAfterRunningActions = "No"
+         filePath = "DayView.m"
+         timestampString = "364140255.897755"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "-handlePan:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
+         condition = "targetDate == nil"
          continueAfterRunningActions = "No"
-         filePath = "DayView.m"
-         timestampString = "363790400.302991"
+         filePath = "MYCalendar/DayViewInformationSheet.m"
+         timestampString = "364136940.202142"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
          landmarkName = "-setTargetDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
+         condition = "[self informationSheet] == nil"
          continueAfterRunningActions = "No"
          filePath = "DayView.m"
-         timestampString = "363790522.587389"
+         timestampString = "364140255.897755"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "-handlePan:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DayView.h"
-         timestampString = "363790400.302991"
+         filePath = "DayView.m"
+         timestampString = "364140255.897755"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "17"
-         endingLineNumber = "17"
-         landmarkName = "informationSheet"
-         landmarkType = "19">
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-handlePan:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DayView.m"
+         timestampString = "364140018.681825"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-handlePan:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DayView.m"
+         timestampString = "364140255.897755"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-handlePan:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

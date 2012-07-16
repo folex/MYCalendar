@@ -105,7 +105,6 @@
 		FAA345FB15AC5A1500EFAD34 = {
 			isa = PBXGroup;
 			children = (
-				FAA3465615AC89C300EFAD34 /* CoreData.framework */,
 				FAA3461015AC5A1500EFAD34 /* MYCalendar */,
 				FAA3462E15AC5A1500EFAD34 /* MYCalendarTests */,
 				FAA3460915AC5A1500EFAD34 /* Frameworks */,
@@ -125,6 +124,7 @@
 		FAA3460915AC5A1500EFAD34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAA3465615AC89C300EFAD34 /* CoreData.framework */,
 				FAA3460A15AC5A1500EFAD34 /* UIKit.framework */,
 				FAA3460C15AC5A1500EFAD34 /* Foundation.framework */,
 				FAA3460E15AC5A1500EFAD34 /* CoreGraphics.framework */,
@@ -390,6 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -410,6 +411,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

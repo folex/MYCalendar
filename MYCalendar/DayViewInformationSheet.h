@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface DayViewInformationSheet : UIView
-@property (weak, nonatomic) IBOutlet UILabel *mainDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *secondaryDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionLabel;
+@property IBOutlet UILabel *mainDateLabel;
+@property IBOutlet UILabel *secondaryDateLabel;
+@property IBOutlet UILabel *durationLabel;
+@property IBOutlet UILabel *statusLabel;
+@property IBOutlet UILabel *titleLabel;
+@property IBOutlet UITextView *descriptionLabel;
+@property (nonatomic) NSDate *targetDate;
 @end

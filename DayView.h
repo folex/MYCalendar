@@ -14,9 +14,14 @@ static NSString *nibName = @"DayView";
 
 @interface DayView : UIView <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *taskBriefView;
-@property (weak, nonatomic) DayViewInformationSheet *informationSheet;
+@property (weak, atomic) DayViewInformationSheet *informationSheet;
+@property (weak, atomic) DayViewInformationSheet *oldInformationSheet;
 
 @property TaskDetailedView *taskDetailedView;
 @property NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic) NSDate *targetDate;
+@property CGPoint firstTouch;
+@property CGPoint sheetOrigin;
+@property UIPanGestureRecognizer *panRecognizer;
+
+- (void) setTargetDate: (NSDate*) targetDate;
 @end
