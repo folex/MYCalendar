@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TaskDetailedView.h
 //  MYCalendar
 //
 //  Created by Alexey on 10.07.12.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface ViewController : UIViewController
+@interface TaskDetailedView : UITableView
 @property NSFetchedResultsController *fetchedResultsController;
 @end

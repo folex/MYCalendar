@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA923E9315AEF7EC0060DE86 /* DayViewInformationSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */; };
+		FA923E9515AEFA790060DE86 /* DayViewInformationSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */; };
 		FAA3460B15AC5A1500EFAD34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460A15AC5A1500EFAD34 /* UIKit.framework */; };
 		FAA3460D15AC5A1500EFAD34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460C15AC5A1500EFAD34 /* Foundation.framework */; };
 		FAA3460F15AC5A1500EFAD34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460E15AC5A1500EFAD34 /* CoreGraphics.framework */; };
@@ -20,6 +22,13 @@
 		FAA3462B15AC5A1500EFAD34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460C15AC5A1500EFAD34 /* Foundation.framework */; };
 		FAA3463315AC5A1500EFAD34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAA3463115AC5A1500EFAD34 /* InfoPlist.strings */; };
 		FAA3463615AC5A1500EFAD34 /* MYCalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA3463515AC5A1500EFAD34 /* MYCalendarTests.m */; };
+		FAA3464415AC5E3400EFAD34 /* WeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA3464315AC5E3400EFAD34 /* WeekView.m */; };
+		FAA3464915AC5F7700EFAD34 /* DayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA3464815AC5F7700EFAD34 /* DayView.xib */; };
+		FAA3464F15AC692400EFAD34 /* TaskDetailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA3464E15AC692400EFAD34 /* TaskDetailedView.m */; };
+		FAA3465215AC694800EFAD34 /* DayView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA3465115AC694800EFAD34 /* DayView.m */; };
+		FAA3465515AC84A300EFAD34 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAA3465315AC84A300EFAD34 /* Model.xcdatamodeld */; };
+		FAA3465715AC89C300EFAD34 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3465615AC89C300EFAD34 /* CoreData.framework */; };
+		FAA346AB15AC8EFD00EFAD34 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA346AA15AC8EFD00EFAD34 /* Event.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA923E9115AEF7EC0060DE86 /* DayViewInformationSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewInformationSheet.h; sourceTree = "<group>"; };
+		FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewInformationSheet.m; sourceTree = "<group>"; };
+		FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayViewInformationSheet.xib; sourceTree = "<group>"; };
 		FAA3460615AC5A1500EFAD34 /* MYCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA3460A15AC5A1500EFAD34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA3460C15AC5A1500EFAD34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,6 +64,17 @@
 		FAA3463215AC5A1500EFAD34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FAA3463415AC5A1500EFAD34 /* MYCalendarTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYCalendarTests.h; sourceTree = "<group>"; };
 		FAA3463515AC5A1500EFAD34 /* MYCalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYCalendarTests.m; sourceTree = "<group>"; };
+		FAA3464215AC5E3400EFAD34 /* WeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekView.h; sourceTree = "<group>"; };
+		FAA3464315AC5E3400EFAD34 /* WeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekView.m; sourceTree = "<group>"; };
+		FAA3464815AC5F7700EFAD34 /* DayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayView.xib; sourceTree = "<group>"; };
+		FAA3464D15AC692400EFAD34 /* TaskDetailedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskDetailedView.h; path = ../TaskDetailedView.h; sourceTree = "<group>"; };
+		FAA3464E15AC692400EFAD34 /* TaskDetailedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskDetailedView.m; path = ../TaskDetailedView.m; sourceTree = "<group>"; };
+		FAA3465015AC694800EFAD34 /* DayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayView.h; path = ../DayView.h; sourceTree = "<group>"; };
+		FAA3465115AC694800EFAD34 /* DayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayView.m; path = ../DayView.m; sourceTree = "<group>"; };
+		FAA3465415AC84A300EFAD34 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		FAA3465615AC89C300EFAD34 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FAA346A915AC8EFD00EFAD34 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		FAA346AA15AC8EFD00EFAD34 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA3465715AC89C300EFAD34 /* CoreData.framework in Frameworks */,
 				FAA3460B15AC5A1500EFAD34 /* UIKit.framework in Frameworks */,
 				FAA3460D15AC5A1500EFAD34 /* Foundation.framework in Frameworks */,
 				FAA3460F15AC5A1500EFAD34 /* CoreGraphics.framework in Frameworks */,
@@ -81,6 +105,7 @@
 		FAA345FB15AC5A1500EFAD34 = {
 			isa = PBXGroup;
 			children = (
+				FAA3465615AC89C300EFAD34 /* CoreData.framework */,
 				FAA3461015AC5A1500EFAD34 /* MYCalendar */,
 				FAA3462E15AC5A1500EFAD34 /* MYCalendarTests */,
 				FAA3460915AC5A1500EFAD34 /* Frameworks */,
@@ -111,9 +136,22 @@
 		FAA3461015AC5A1500EFAD34 /* MYCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */,
+				FAA3464815AC5F7700EFAD34 /* DayView.xib */,
+				FAA3465015AC694800EFAD34 /* DayView.h */,
+				FAA3465115AC694800EFAD34 /* DayView.m */,
+				FA923E9115AEF7EC0060DE86 /* DayViewInformationSheet.h */,
+				FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */,
+				FAA3465315AC84A300EFAD34 /* Model.xcdatamodeld */,
+				FAA346A915AC8EFD00EFAD34 /* Event.h */,
+				FAA346AA15AC8EFD00EFAD34 /* Event.m */,
+				FAA3464D15AC692400EFAD34 /* TaskDetailedView.h */,
+				FAA3464E15AC692400EFAD34 /* TaskDetailedView.m */,
 				FAA3461915AC5A1500EFAD34 /* AppDelegate.h */,
 				FAA3461A15AC5A1500EFAD34 /* AppDelegate.m */,
 				FAA3461C15AC5A1500EFAD34 /* MainStoryboard.storyboard */,
+				FAA3464215AC5E3400EFAD34 /* WeekView.h */,
+				FAA3464315AC5E3400EFAD34 /* WeekView.m */,
 				FAA3461F15AC5A1500EFAD34 /* ViewController.h */,
 				FAA3462015AC5A1500EFAD34 /* ViewController.m */,
 				FAA3461115AC5A1500EFAD34 /* Supporting Files */,
@@ -161,6 +199,7 @@
 				FAA3460215AC5A1500EFAD34 /* Sources */,
 				FAA3460315AC5A1500EFAD34 /* Frameworks */,
 				FAA3460415AC5A1500EFAD34 /* Resources */,
+				FA923E8F15AD6EA70060DE86 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -223,6 +262,8 @@
 			files = (
 				FAA3461515AC5A1500EFAD34 /* InfoPlist.strings in Resources */,
 				FAA3461E15AC5A1500EFAD34 /* MainStoryboard.storyboard in Resources */,
+				FAA3464915AC5F7700EFAD34 /* DayView.xib in Resources */,
+				FA923E9515AEFA790060DE86 /* DayViewInformationSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +278,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		FA923E8F15AD6EA70060DE86 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind ${SRCROOT} \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
 		FAA3462515AC5A1500EFAD34 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +314,12 @@
 				FAA3461715AC5A1500EFAD34 /* main.m in Sources */,
 				FAA3461B15AC5A1500EFAD34 /* AppDelegate.m in Sources */,
 				FAA3462115AC5A1500EFAD34 /* ViewController.m in Sources */,
+				FAA3464415AC5E3400EFAD34 /* WeekView.m in Sources */,
+				FAA3464F15AC692400EFAD34 /* TaskDetailedView.m in Sources */,
+				FAA3465215AC694800EFAD34 /* DayView.m in Sources */,
+				FAA3465515AC84A300EFAD34 /* Model.xcdatamodeld in Sources */,
+				FAA346AB15AC8EFD00EFAD34 /* Event.m in Sources */,
+				FA923E9315AEF7EC0060DE86 /* DayViewInformationSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +491,7 @@
 				FAA3463B15AC5A1500EFAD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAA3463C15AC5A1500EFAD34 /* Build configuration list for PBXNativeTarget "MYCalendarTests" */ = {
 			isa = XCConfigurationList;
@@ -439,8 +500,22 @@
 				FAA3463E15AC5A1500EFAD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FAA3465315AC84A300EFAD34 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FAA3465415AC84A300EFAD34 /* Model.xcdatamodel */,
+			);
+			currentVersion = FAA3465415AC84A300EFAD34 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FAA345FD15AC5A1500EFAD34 /* Project object */;
 }
