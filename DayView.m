@@ -18,9 +18,8 @@
 @synthesize fetchedResultsController;
 @synthesize informationSheet;
 @synthesize oldInformationSheet;
-@synthesize firstTouch;
-@synthesize panRecognizer;
-@synthesize sheetOrigin;
+@synthesize informationSheetScroll;
+@synthesize informationSheets;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -36,22 +35,18 @@
     [super awakeFromNib];
     UINib *sheetNib = [UINib nibWithNibName: @"DayViewInformationSheet" bundle: nil];
     [self setInformationSheet: [[sheetNib instantiateWithOwner: self options: nil] objectAtIndex: 0]];
-    CGPoint infSheetCenter = {[self taskBriefView].frame.size.width + [self informationSheet].frame.size.width/2, [self informationSheet].frame.size.height/2};
-    [[self informationSheet] setCenter: infSheetCenter];
-    [[[[self informationSheet] descriptionLabel]layer] setBorderWidth: 1];
-    [[[self informationSheet] descriptionLabel]setText: @""];
-    [[[self informationSheet] titleLabel]setText: @""];
-    [[[self informationSheet] durationLabel]setText: @""];
-    [[[self informationSheet] statusLabel]setText: @""];
-    [self addSubview: informationSheet];
-//    [[self layer] setCornerRadius: 5];
+    [[self informationSheet] setCenter: [self convertPoint: [[self informationSheetScroll] center] toView: [self informationSheetScroll]]];
     [[self taskBriefView] setDelegate: self];
     [[self taskBriefView] setDataSource: self];
     [[self taskBriefView] setOpaque: NO];
-    
-    [self setPanRecognizer: [[UIPanGestureRecognizer alloc] initWithTarget: self action:@selector(handlePan:)]];
-    [self addGestureRecognizer: panRecognizer];
     [self setOldInformationSheet: nil];
+    [[self informationSheetScroll] setDelegate: self];
+//    [[self informationSheetScroll] setPagingEnabled: YES];
+    [[self informationSheetScroll] addSubview: informationSheet];
+    CGRect infScrollFrame = {[[self informationSheetScroll] frame].origin, [[self informationSheet] frame].size};
+    [[self informationSheetScroll] setBounds: infScrollFrame];
+    [[self informationSheetScroll] setContentSize: CGSizeMake([[self informationSheet] bounds].size.width * 2, [[self informationSheet] bounds].size.height)];
+    [self setInformationSheets: [NSMutableArray arrayWithObject: [self informationSheet]]];
 }
 
 /*
@@ -66,128 +61,61 @@
 - (void) setTargetDate: (NSDate*) targetDate
 {
     [[self informationSheet] setTargetDate: targetDate];
-}
-
-- (void) handlePan: (UIPanGestureRecognizer*) recognizer
-{
-    NSLog(@"Pan detected.");
-    switch ([recognizer state]) {
-        case UIGestureRecognizerStateBegan:
-        {
-            if ([recognizer locationInView: [recognizer view]].x < [[self taskBriefView] frame].size.width - 20) {
-//                [[self panRecognizer] setCancelsTouchesInView: YES];
-                [[self panRecognizer] setEnabled: NO];
-                return;
-            }
-            if ([self informationSheet] == NULL) {
-                NSMutableArray *forDeleting = [NSMutableArray array];
-                for (UIView *subview in [self subviews]) {
-                    if ([subview isKindOfClass: [DayViewInformationSheet class]]) {
-                        [forDeleting addObject: subview];
-                    }
-                }
-                for (UIView *subview in forDeleting) {
-                    [subview removeFromSuperview];
-                }
-                [self awakeFromNib];
-            }
-            [self setOldInformationSheet: [self informationSheet]];
-            UINib *sheetNib = [UINib nibWithNibName: @"DayViewInformationSheet" bundle: nil];
-            [self setInformationSheet: [[sheetNib instantiateWithOwner: self options: nil] objectAtIndex: 0]];
-            CGPoint infSheetCenter = {[[self oldInformationSheet] center].x + [[self oldInformationSheet] frame].size.width, 
-                [[self oldInformationSheet] center].y};
-            [[self informationSheet] setCenter: infSheetCenter];
-            [[[self informationSheet] layer] setBorderWidth: 1.0];
-            [self setFirstTouch: [recognizer locationInView: [recognizer view]]];
-            [self setSheetOrigin: [[self oldInformationSheet] frame].origin];
-            [self sendSubviewToBack: [self oldInformationSheet]];
-            [self addSubview: [self informationSheet]];
-            [self sendSubviewToBack: [self informationSheet]];
-            break;
-        }
-            
-        case UIGestureRecognizerStateChanged:
-        { 
-            CGRect oldSheetFrame = {{[self sheetOrigin].x - [self firstTouch].x + [recognizer locationInView: [recognizer view]].x,
-            [self sheetOrigin].y},
-            [[self oldInformationSheet] frame].size};
-            [[self oldInformationSheet] setFrame: oldSheetFrame];
-            if ([self sheetOrigin].x - oldSheetFrame.origin.x >= 0) {
-                CGRect infromationSheetFrame = {{oldSheetFrame.origin.x + oldSheetFrame.size.width, oldSheetFrame.origin.y}, oldSheetFrame.size};
-                [[self informationSheet] setFrame: infromationSheetFrame];
-                [[self informationSheet] setTargetDate: [[[self oldInformationSheet] targetDate] dateByAddingTimeInterval: 86400]];
-//                [self setTargetDate: [[self oldInformationSheet]]
-            } else {
-                CGRect infromationSheetFrame = {{oldSheetFrame.origin.x - oldSheetFrame.size.width, oldSheetFrame.origin.y}, oldSheetFrame.size};
-                [[self informationSheet] setFrame: infromationSheetFrame];
-                [[self informationSheet] setTargetDate: [[[self oldInformationSheet] targetDate] dateByAddingTimeInterval: -86400]];
-            }
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        {
-            [[self panRecognizer] setCancelsTouchesInView: YES];
-            [[self panRecognizer] setEnabled: NO];
-            if ([[self oldInformationSheet] center].x <= [self center].x)
-            {
-                [UIView animateWithDuration: 0.5 animations:^{
-                    [[self oldInformationSheet] setCenter: [[self taskBriefView] center]];
-                    CGRect sheetFrame = {[self sheetOrigin], [[self informationSheet] frame].size};
-                    [[self informationSheet] setFrame: sheetFrame];     
-//                    [[self informationSheet] setTargetDate: [[[self oldInformationSheet] targetDate] dateByAddingTimeInterval: 86400]];
-                    [[self taskBriefView] reloadData];
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        [[self oldInformationSheet] removeFromSuperview];
-//                        [self setOldInformationSheet: nil];
-                        [[self taskBriefView] reloadData];
-                    }
-                }];
-            } else if (([[self oldInformationSheet] center].x > [self center].x) && ([[self oldInformationSheet] center].x < [self bounds].size.width - 50)) {
-                [UIView animateWithDuration: 0.5 animations:^{
-                    CGRect sheetFrame = {[self sheetOrigin], [[self informationSheet] frame].size};
-                    [[self oldInformationSheet] setFrame: sheetFrame];     
-                    NSInteger mult = ([[self informationSheet] frame].origin.x - [self oldInformationSheet].frame.origin.x) < 0 ? -1 : 1;
-                    CGRect infromationSheetFrame = {{[[self oldInformationSheet] frame].origin.x + [[self oldInformationSheet] frame].size.width * mult, 
-                                                     [[self oldInformationSheet] frame].origin.y}, [[self oldInformationSheet] frame].size};
-                    [[self informationSheet] setFrame: infromationSheetFrame];
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        [[self informationSheet] removeFromSuperview];
-                        [self setInformationSheet: [self oldInformationSheet]];
-//                        [self setOldInformationSheet: nil];
-                    }
-                }];
-            } else {
-                [UIView animateWithDuration: 0.5 animations:^{
-                    NSInteger mult = ([[self informationSheet] frame].origin.x - [self oldInformationSheet].frame.origin.x) < 0 ? 1 : -1;
-                    CGRect sheetFrame = {[self sheetOrigin], [[self informationSheet] frame].size};
-                    [[self informationSheet] setFrame: sheetFrame];     
-                    CGRect oldSheetFrame = {{[[self informationSheet] frame].origin.x + [[self informationSheet] frame].size.width * mult, 
-                        [[self oldInformationSheet] frame].origin.y}, [[self oldInformationSheet] frame].size};
-                    [[self oldInformationSheet] setFrame: oldSheetFrame];
-//                    [[self informationSheet] setTargetDate: [[[self oldInformationSheet] targetDate] dateByAddingTimeInterval: -86400]];
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        [[self oldInformationSheet] removeFromSuperview];
-//                        [self setOldInformationSheet: nil];
-                        [[self taskBriefView] reloadData];
-                    }
-                }];
-            }
-            [[self panRecognizer] setCancelsTouchesInView: NO];
-            [[self panRecognizer] setEnabled: YES];
-            break;
-        }
-        default:
-            break;
+    NSManagedObjectContext *context = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSPredicate *predicate = [NSPredicate 
+                              predicateWithFormat: @"\
+                              (startDate >= %f AND endDate < %f) OR \
+                              (startDate <= %f AND endDate > %f) OR \
+                              (startDate < %f AND (endDate > %f AND endDate < %f)) OR \
+                              (endDate > %f AND (startDate > %f AND startDate < %f))", 
+                              [[[self informationSheet] targetDate] timeIntervalSince1970], 
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400,
+                              [[[self informationSheet] targetDate] timeIntervalSince1970], 
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400,
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400, 
+                              [[[self informationSheet] targetDate] timeIntervalSince1970],
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400,
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400, 
+                              [[[self informationSheet] targetDate] timeIntervalSince1970],
+                              [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400];
+    
+    NSSortDescriptor *descr = [[NSSortDescriptor alloc] initWithKey: @"startDate" ascending: YES];
+    double testStart = [[[self informationSheet] targetDate] timeIntervalSince1970];
+    double testEnd = [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400;
+    NSLog(@"testStart = %@\ntestEnd = %@", [NSDate dateWithTimeIntervalSince1970: testStart], [NSDate dateWithTimeIntervalSince1970: testEnd]);
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: @"Event"];
+    [request setPredicate: predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject: descr]];
+    [self  setFetchedResultsController: [[NSFetchedResultsController alloc] 
+                                                              initWithFetchRequest: request 
+                                                              managedObjectContext: context 
+                                                              sectionNameKeyPath: [NSString 
+                                                                                   stringWithFormat: @"startDate"] 
+                                                              cacheName: @"dayView"]]; //.compare(%f)", [[[self informationSheet] targetDate] timeIntervalSince1970]] cacheName: @"dayView"]];
+    NSError* error;
+    [[self fetchedResultsController] performFetch: &error];
+    if (error) {
+        NSLog(@"Core Data fetching error: %@", error);
     }
-    [[self panRecognizer] setEnabled: YES];
-    NSLog(@"\nBound x: %f\nOld: %f\nNew: %f", [self bounds].size.width, [[self oldInformationSheet] center].x, [[self informationSheet] center].x);
+    [[self taskBriefView] reloadData];
 }
 
+- (DayViewInformationSheet*) addInformationSheetAtPoint:(CGPoint) point
+{
+    UINib *sheetNib = [UINib nibWithNibName: @"DayViewInformationSheet" bundle: nil];
+    DayViewInformationSheet *sheet = [[sheetNib instantiateWithOwner: self options: nil] objectAtIndex: 0];
+    CGRect sheetFrame = {point, [sheet frame].size};
+    [sheet setFrame: sheetFrame];
+    [[self informationSheetScroll] addSubview: sheet];
+    [[self informationSheets] addObject: sheet];
+    return sheet;
+}
 
+- (void) addInformationSheetAtPoint:(CGPoint) point WithDate:(NSDate*) date
+{
+    DayViewInformationSheet *inf = [self addInformationSheetAtPoint: point];
+    [inf setTargetDate: date];
+}
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -235,6 +163,89 @@
                                     [formatter stringFromDate: [NSDate dateWithTimeIntervalSince1970: [[event startDate] doubleValue]]], 
                                     [formatter stringFromDate: [NSDate dateWithTimeIntervalSince1970: [[event endDate] doubleValue]]]]]; 
     [[[self informationSheet] durationLabel]sizeToFit];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    NSLog(@"We are in: %s", __FUNCTION__);
+    NSLog(@"Content offset is: (%f,%f)", [[self informationSheetScroll] contentOffset].x, [[self informationSheetScroll] contentOffset].y);
+    CGRect lastSubviewFrame = [[[self informationSheets] lastObject] frame];
+//    NSLog(@"bound is: %f", CGRectGetMaxX(lastSubviewFrame));
+    if ([[self informationSheetScroll] contentOffset].x > 0) {
+        NSLog(@"Went right");
+//        NSLog(@"Last informationSheet date is: %@", [[[self informationSheets] lastObject] targetDate]);
+        CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count] + 1), lastSubviewFrame.size.height};
+        [[self informationSheetScroll] setContentSize: contentSize];
+        [self addInformationSheetAtPoint: CGPointMake(CGRectGetMaxX(lastSubviewFrame), lastSubviewFrame.origin.y) 
+                                WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: 86400]];
+    } else if ([[self informationSheetScroll] contentOffset].x < 0) {
+        NSLog(@"Went left.");
+        CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count] + 4), lastSubviewFrame.size.height};
+        [[self informationSheetScroll] setContentSize: contentSize];
+//        CGRect test = [[self informationSheetScroll] bounds];
+//        NSLog(@"width is: %f", [[self informationSheetScroll] contentSize].width);
+//        CGRect informationRect = {{[[self informationSheetScroll] contentSize].width - 
+//                                   [[self informationSheet] frame].size.width, 
+//                                                 [[self informationSheet] frame].origin.y},
+//                                                 [[self informationSheet] frame].size};
+////        [[self informationSheet] setFrame: informationRect];
+        CGPoint infSheetPoint = {-[[self informationSheet] frame].size.width, [[self informationSheet] frame].origin.y};
+        [self addInformationSheetAtPoint: infSheetPoint WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: -86400]];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    NSLog(@"We are in: %s", __FUNCTION__);
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{   
+//    NSLog(@"We are in: %s", __FUNCTION__);
+//    NSLog(@"Will decelerate: %d", decelerate);
+    if (!decelerate) {
+        [self showOnlyVisibleSheetOnScrollView: [self informationSheetScroll]  animated: YES];
+
+//        [[self informationSheetScroll] setContentSize: contentSize];
+        return;               
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+//    NSLog(@"We are in: %s", __FUNCTION__);
+    
+    [self showOnlyVisibleSheetOnScrollView: [self informationSheetScroll] animated: YES];
+//    [[self informationSheetScroll] setContentSize: contentSize];
+    return;
+}
+
+- (void) showOnlyVisibleSheetOnScrollView: (UIScrollView*) scrollView animated: (BOOL) animated
+{
+    for (DayViewInformationSheet *sheet in [self informationSheets]) {
+        if (((CGRectGetMinX([sheet frame]) < CGRectGetMidX([scrollView bounds]))   && 
+             (CGRectGetMinX([sheet frame]) >= CGRectGetMinX([scrollView bounds]))) || 
+            ((CGRectGetMaxX([sheet frame]) > CGRectGetMidX([scrollView bounds]))   &&
+             (CGRectGetMaxX([sheet frame]) <= CGRectGetMaxX([scrollView bounds])))) {
+//               CGPoint scrollContentOffset = CGPointMake(CGRectGetMinX([sheet frame]), CGRectGetMinY([sheet frame]));
+                [self setInformationSheet: sheet];
+                [self setTargetDate: [sheet targetDate]];
+            } else {
+                [sheet removeFromSuperview];
+            }
+    }
+    CGRect rect = {{0,0}, [[self informationSheet] frame].size};
+    [UIView beginAnimations: nil context: NULL];
+    [UIView setAnimationDuration: 0.5];
+    [[self informationSheet] setFrame: rect];
+    [[self informationSheetScroll] setContentOffset: rect.origin];
+    [UIView commitAnimations];
+    CGSize contentSize = {[[self informationSheet] frame].size.width * 2, 
+        [[self informationSheet] frame].size.height};
+    [[self informationSheetScroll] setContentSize: contentSize];  
+    NSLog(@"Sheet is: %@", [self informationSheet]);
+    [[self informationSheets] removeAllObjects];
+    [[self informationSheets] addObject: [self informationSheet]];
 }
 
 

@@ -12,16 +12,15 @@
 
 static NSString *nibName = @"DayView";
 
-@interface DayView : UIView <UITableViewDelegate, UITableViewDataSource>
+@interface DayView : UIView <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *taskBriefView;
 @property (weak, atomic) DayViewInformationSheet *informationSheet;
 @property (weak, atomic) DayViewInformationSheet *oldInformationSheet;
+@property (weak, nonatomic) IBOutlet UIScrollView *informationSheetScroll;
 
 @property TaskDetailedView *taskDetailedView;
 @property NSFetchedResultsController *fetchedResultsController;
-@property CGPoint firstTouch;
-@property CGPoint sheetOrigin;
-@property UIPanGestureRecognizer *panRecognizer;
+@property NSMutableArray *informationSheets;
 
 - (void) setTargetDate: (NSDate*) targetDate;
 @end

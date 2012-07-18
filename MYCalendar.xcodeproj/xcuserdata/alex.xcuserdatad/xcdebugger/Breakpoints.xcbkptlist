@@ -8,35 +8,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MYCalendar/DayViewInformationSheet.m"
-         timestampString = "364136940.202142"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
-         landmarkName = "-setTargetDate:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "1"
-         condition = "[self oldInformationSheet] == nil"
-         continueAfterRunningActions = "No"
-         filePath = "DayView.m"
-         timestampString = "364140255.897755"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
-         landmarkName = "-handlePan:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         condition = "targetDate == nil"
-         continueAfterRunningActions = "No"
-         filePath = "MYCalendar/DayViewInformationSheet.m"
-         timestampString = "364136940.202142"
+         timestampString = "364310332.619248"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "64"
@@ -47,15 +19,15 @@
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
-         condition = "[self informationSheet] == nil"
+         condition = "targetDate == nil"
          continueAfterRunningActions = "No"
-         filePath = "DayView.m"
-         timestampString = "364140255.897755"
+         filePath = "MYCalendar/DayViewInformationSheet.m"
+         timestampString = "364309598.655157"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
-         landmarkName = "-handlePan:"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
+         landmarkName = "-setTargetDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -63,12 +35,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DayView.m"
-         timestampString = "364140255.897755"
+         timestampString = "364296690.791822"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-handlePan:"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-setTargetDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -76,12 +48,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DayView.m"
-         timestampString = "364140018.681825"
+         timestampString = "364313651.562418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-handlePan:"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "-scrollViewDidScroll:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MYCalendar/DayViewInformationSheet.m"
+         timestampString = "364309607.363472"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-setTargetDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -89,13 +74,35 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DayView.m"
-         timestampString = "364140255.897755"
+         timestampString = "364315781.599035"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "111"
-         endingLineNumber = "111"
-         landmarkName = "-handlePan:"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
+         landmarkName = "-scrollViewDidScroll:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DayView.m"
+         timestampString = "364323212.857818"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
+         landmarkName = "-scrollViewDidScroll:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>
