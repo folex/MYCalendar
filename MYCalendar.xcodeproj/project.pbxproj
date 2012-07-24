@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		FA923E9315AEF7EC0060DE86 /* DayViewInformationSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */; };
 		FA923E9515AEFA790060DE86 /* DayViewInformationSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */; };
+		FA9A1F2215BD2052001C17E3 /* TaskDetailedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9A1F2115BD2052001C17E3 /* TaskDetailedView.xib */; };
+		FA9A1F2C15BD32F3001C17E3 /* TaskMarkRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A1F2B15BD32F3001C17E3 /* TaskMarkRectangle.m */; };
+		FA9A1F3215BD40B4001C17E3 /* DatePickPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9A1F3115BD40B4001C17E3 /* DatePickPopover.xib */; };
+		FA9A1F3815BD49E1001C17E3 /* DatePickPopoverContent.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A1F3715BD49E1001C17E3 /* DatePickPopoverContent.m */; };
+		FA9A1F3A15BD4E93001C17E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1F3915BD4E92001C17E3 /* QuartzCore.framework */; };
 		FAA3460B15AC5A1500EFAD34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460A15AC5A1500EFAD34 /* UIKit.framework */; };
 		FAA3460D15AC5A1500EFAD34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460C15AC5A1500EFAD34 /* Foundation.framework */; };
 		FAA3460F15AC5A1500EFAD34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA3460E15AC5A1500EFAD34 /* CoreGraphics.framework */; };
@@ -45,6 +50,13 @@
 		FA923E9115AEF7EC0060DE86 /* DayViewInformationSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewInformationSheet.h; sourceTree = "<group>"; };
 		FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewInformationSheet.m; sourceTree = "<group>"; };
 		FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayViewInformationSheet.xib; sourceTree = "<group>"; };
+		FA9A1F2115BD2052001C17E3 /* TaskDetailedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailedView.xib; sourceTree = "<group>"; };
+		FA9A1F2815BD2AB1001C17E3 /* TaskMarkRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskMarkRectangle.h; sourceTree = "<group>"; };
+		FA9A1F2B15BD32F3001C17E3 /* TaskMarkRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskMarkRectangle.m; sourceTree = "<group>"; };
+		FA9A1F3115BD40B4001C17E3 /* DatePickPopover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickPopover.xib; sourceTree = "<group>"; };
+		FA9A1F3615BD49E1001C17E3 /* DatePickPopoverContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickPopoverContent.h; path = ../DatePickPopoverContent.h; sourceTree = "<group>"; };
+		FA9A1F3715BD49E1001C17E3 /* DatePickPopoverContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickPopoverContent.m; path = ../DatePickPopoverContent.m; sourceTree = "<group>"; };
+		FA9A1F3915BD4E92001C17E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FAA3460615AC5A1500EFAD34 /* MYCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA3460A15AC5A1500EFAD34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA3460C15AC5A1500EFAD34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9A1F3A15BD4E93001C17E3 /* QuartzCore.framework in Frameworks */,
 				FAA3465715AC89C300EFAD34 /* CoreData.framework in Frameworks */,
 				FAA3460B15AC5A1500EFAD34 /* UIKit.framework in Frameworks */,
 				FAA3460D15AC5A1500EFAD34 /* Foundation.framework in Frameworks */,
@@ -124,6 +137,7 @@
 		FAA3460915AC5A1500EFAD34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA9A1F3915BD4E92001C17E3 /* QuartzCore.framework */,
 				FAA3465615AC89C300EFAD34 /* CoreData.framework */,
 				FAA3460A15AC5A1500EFAD34 /* UIKit.framework */,
 				FAA3460C15AC5A1500EFAD34 /* Foundation.framework */,
@@ -136,24 +150,30 @@
 		FAA3461015AC5A1500EFAD34 /* MYCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				FAA3461C15AC5A1500EFAD34 /* MainStoryboard.storyboard */,
 				FA923E9415AEFA790060DE86 /* DayViewInformationSheet.xib */,
 				FAA3464815AC5F7700EFAD34 /* DayView.xib */,
+				FA9A1F2115BD2052001C17E3 /* TaskDetailedView.xib */,
+				FA9A1F3115BD40B4001C17E3 /* DatePickPopover.xib */,
 				FAA3465015AC694800EFAD34 /* DayView.h */,
 				FAA3465115AC694800EFAD34 /* DayView.m */,
 				FA923E9115AEF7EC0060DE86 /* DayViewInformationSheet.h */,
 				FA923E9215AEF7EC0060DE86 /* DayViewInformationSheet.m */,
-				FAA3465315AC84A300EFAD34 /* Model.xcdatamodeld */,
 				FAA346A915AC8EFD00EFAD34 /* Event.h */,
 				FAA346AA15AC8EFD00EFAD34 /* Event.m */,
 				FAA3464D15AC692400EFAD34 /* TaskDetailedView.h */,
 				FAA3464E15AC692400EFAD34 /* TaskDetailedView.m */,
+				FA9A1F2815BD2AB1001C17E3 /* TaskMarkRectangle.h */,
+				FA9A1F2B15BD32F3001C17E3 /* TaskMarkRectangle.m */,
+				FA9A1F3615BD49E1001C17E3 /* DatePickPopoverContent.h */,
+				FA9A1F3715BD49E1001C17E3 /* DatePickPopoverContent.m */,
 				FAA3461915AC5A1500EFAD34 /* AppDelegate.h */,
 				FAA3461A15AC5A1500EFAD34 /* AppDelegate.m */,
-				FAA3461C15AC5A1500EFAD34 /* MainStoryboard.storyboard */,
 				FAA3464215AC5E3400EFAD34 /* WeekView.h */,
 				FAA3464315AC5E3400EFAD34 /* WeekView.m */,
 				FAA3461F15AC5A1500EFAD34 /* ViewController.h */,
 				FAA3462015AC5A1500EFAD34 /* ViewController.m */,
+				FAA3465315AC84A300EFAD34 /* Model.xcdatamodeld */,
 				FAA3461115AC5A1500EFAD34 /* Supporting Files */,
 			);
 			path = MYCalendar;
@@ -264,6 +284,8 @@
 				FAA3461E15AC5A1500EFAD34 /* MainStoryboard.storyboard in Resources */,
 				FAA3464915AC5F7700EFAD34 /* DayView.xib in Resources */,
 				FA923E9515AEFA790060DE86 /* DayViewInformationSheet.xib in Resources */,
+				FA9A1F2215BD2052001C17E3 /* TaskDetailedView.xib in Resources */,
+				FA9A1F3215BD40B4001C17E3 /* DatePickPopover.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +342,8 @@
 				FAA3465515AC84A300EFAD34 /* Model.xcdatamodeld in Sources */,
 				FAA346AB15AC8EFD00EFAD34 /* Event.m in Sources */,
 				FA923E9315AEF7EC0060DE86 /* DayViewInformationSheet.m in Sources */,
+				FA9A1F2C15BD32F3001C17E3 /* TaskMarkRectangle.m in Sources */,
+				FA9A1F3815BD49E1001C17E3 /* DatePickPopoverContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

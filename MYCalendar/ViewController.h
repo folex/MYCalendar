@@ -10,5 +10,6 @@
 #import <CoreData/CoreData.h>
 
 @interface ViewController : UIViewController
+@property UIPopoverController *popover;
 @property NSFetchedResultsController *fetchedResultsController;
 @end

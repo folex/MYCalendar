@@ -19,7 +19,6 @@ static NSString *nibName = @"DayView";
 @property (weak, nonatomic) IBOutlet UIScrollView *informationSheetScroll;
 
 @property TaskDetailedView *taskDetailedView;
-@property NSFetchedResultsController *fetchedResultsController;
 @property NSMutableArray *informationSheets;
 
 - (void) setTargetDate: (NSDate*) targetDate;

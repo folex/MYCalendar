@@ -15,6 +15,8 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize fetchedResultsController = __fetchedResultsController;
+@synthesize calendarViewController;
+@synthesize tableViewsToBeUpdated;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -151,5 +153,37 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (void) updateTableViews
+{
+    for (UITableView* table in [self tableViewsToBeUpdated])
+    {
+        [table reloadData];
+    }
+}
 
+- (NSFetchedResultsController*) fetchedResultsController
+{
+    @synchronized (self) 
+    {
+        return self->__fetchedResultsController;
+    }
+}
+
+- (void) setFetchedResultsController: (NSFetchedResultsController*) fetchedResultsController
+{
+    @synchronized (self)
+    {
+        if (self->__fetchedResultsController != fetchedResultsController) 
+        {
+            self->__fetchedResultsController = fetchedResultsController;
+            [self->__fetchedResultsController setDelegate: self];
+        }
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self updateTableViews];
+    NSLog(@"Updating tableViews");
+}
 @end

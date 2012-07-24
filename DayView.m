@@ -15,7 +15,6 @@
 @implementation DayView
 @synthesize taskBriefView;
 @synthesize taskDetailedView;
-@synthesize fetchedResultsController;
 @synthesize informationSheet;
 @synthesize oldInformationSheet;
 @synthesize informationSheetScroll;
@@ -33,9 +32,12 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
+    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] tableViewsToBeUpdated] addObject: [self taskBriefView]];
     UINib *sheetNib = [UINib nibWithNibName: @"DayViewInformationSheet" bundle: nil];
     [self setInformationSheet: [[sheetNib instantiateWithOwner: self options: nil] objectAtIndex: 0]];
-    [[self informationSheet] setCenter: [self convertPoint: [[self informationSheetScroll] center] toView: [self informationSheetScroll]]];
+//    [[self informationSheet] setCenter: [self convertPoint: [[self informationSheetScroll] center] toView: [self informationSheetScroll]]];
+    CGRect frame = {{0,0}, [[self informationSheet] frame].size};
+    [[self informationSheet] setFrame: frame];
     [[self taskBriefView] setDelegate: self];
     [[self taskBriefView] setDataSource: self];
     [[self taskBriefView] setOpaque: NO];
@@ -49,6 +51,27 @@
     [self setInformationSheets: [NSMutableArray arrayWithObject: [self informationSheet]]];
 }
 
+- (void) testFunc
+{
+    NSLog(@"Test func");
+    CGPoint scrollContentOffset = {CGRectGetMaxX([[[self informationSheets] lastObject] frame]), [[[self informationSheets] lastObject] frame].origin.y};
+    CGRect scrollBounds = [[self informationSheetScroll] bounds];
+    scrollBounds.origin = scrollContentOffset;
+    [[self informationSheetScroll] setBounds: scrollBounds];
+    //            CGPoint newInfPoint = {0, 0};
+    CGRect lastSheetFrame = [[[self informationSheets] lastObject] frame];
+    lastSheetFrame.origin = scrollContentOffset;
+    [[[self informationSheets] lastObject] setFrame: lastSheetFrame];
+    [self addInformationSheetAtPoint: CGPointZero WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: -86400]];
+    NSArray *subviews = [[self informationSheetScroll] subviews];
+    for (UIView *view in subviews) {
+        if ([view isKindOfClass: [DayViewInformationSheet class]]) {
+            NSLog(@"TargetDate: %@ (%f,%f)", [(DayViewInformationSheet*)view targetDate], [view frame].origin.x, [view frame].origin.y);
+        }
+    }
+    NSLog(@"Current bounds are: (%f,%f)", [[self informationSheetScroll] bounds].origin.x, [[self informationSheetScroll] bounds].origin.y);
+    [self setTag: 0];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -80,20 +103,20 @@
                               [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400];
     
     NSSortDescriptor *descr = [[NSSortDescriptor alloc] initWithKey: @"startDate" ascending: YES];
-    double testStart = [[[self informationSheet] targetDate] timeIntervalSince1970];
-    double testEnd = [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400;
-    NSLog(@"testStart = %@\ntestEnd = %@", [NSDate dateWithTimeIntervalSince1970: testStart], [NSDate dateWithTimeIntervalSince1970: testEnd]);
+//    double testStart = [[[self informationSheet] targetDate] timeIntervalSince1970];
+//    double testEnd = [[[self informationSheet] targetDate] timeIntervalSince1970] + 86400;
+//    NSLog(@"testStart = %@\ntestEnd = %@", [NSDate dateWithTimeIntervalSince1970: testStart], [NSDate dateWithTimeIntervalSince1970: testEnd]);
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: @"Event"];
     [request setPredicate: predicate];
     [request setSortDescriptors: [NSArray arrayWithObject: descr]];
-    [self  setFetchedResultsController: [[NSFetchedResultsController alloc] 
+    [(AppDelegate*)[[UIApplication sharedApplication] delegate] setFetchedResultsController: [[NSFetchedResultsController alloc] 
                                                               initWithFetchRequest: request 
                                                               managedObjectContext: context 
                                                               sectionNameKeyPath: [NSString 
                                                                                    stringWithFormat: @"startDate"] 
                                                               cacheName: @"dayView"]]; //.compare(%f)", [[[self informationSheet] targetDate] timeIntervalSince1970]] cacheName: @"dayView"]];
     NSError* error;
-    [[self fetchedResultsController] performFetch: &error];
+    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] fetchedResultsController] performFetch: &error];
     if (error) {
         NSLog(@"Core Data fetching error: %@", error);
     }
@@ -120,7 +143,7 @@
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    Event *cellInfo = [[self fetchedResultsController] objectAtIndexPath: indexPath];
+    Event *cellInfo = [[(AppDelegate*)[[UIApplication sharedApplication] delegate] fetchedResultsController] objectAtIndexPath: indexPath];
     [[cell textLabel] setText: [cellInfo eventTitle]];
     [[cell detailTextLabel] setText: [cellInfo eventDescription]];
     return cell;
@@ -128,21 +151,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Section : %@", [[[[self fetchedResultsController] sections] objectAtIndex: section] name]);
+//    NSLog(@"Section : %@", [[[[self fetchedResultsController] sections] objectAtIndex: section] name]);
     
-    return [[[[self fetchedResultsController] sections] objectAtIndex: section] numberOfObjects];
+    return [[[[(AppDelegate*)[[UIApplication sharedApplication] delegate] fetchedResultsController] sections] objectAtIndex: section] numberOfObjects];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"There are %d sections.", [[[self fetchedResultsController] sections] count]);
-    return [[[self fetchedResultsController] sections] count];
+//    NSLog(@"There are %d sections.", [[[self fetchedResultsController] sections] count]);
+    return [[[(AppDelegate*)[[UIApplication sharedApplication] delegate] fetchedResultsController] sections] count];
 //    return 2; //Started at targetDate; Started before targetDate;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Event *event = [[self fetchedResultsController] objectAtIndexPath: indexPath];
+    Event *event = [[(AppDelegate*)[[UIApplication sharedApplication] delegate] fetchedResultsController] objectAtIndexPath: indexPath];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     NSLog(@"Current locale is: %@", [[NSLocale currentLocale] localeIdentifier]);
 //    [formatter setLocale: [NSLocale currentLocale]];
@@ -168,35 +191,50 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    NSLog(@"We are in: %s", __FUNCTION__);
-    NSLog(@"Content offset is: (%f,%f)", [[self informationSheetScroll] contentOffset].x, [[self informationSheetScroll] contentOffset].y);
+//    NSLog(@"Content offset is: (%f,%f)", [[self informationSheetScroll] contentOffset].x, [[self informationSheetScroll] contentOffset].y);
     CGRect lastSubviewFrame = [[[self informationSheets] lastObject] frame];
 //    NSLog(@"bound is: %f", CGRectGetMaxX(lastSubviewFrame));
-    if ([[self informationSheetScroll] contentOffset].x > 0) {
-        NSLog(@"Went right");
-//        NSLog(@"Last informationSheet date is: %@", [[[self informationSheets] lastObject] targetDate]);
-        CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count] + 1), lastSubviewFrame.size.height};
-        [[self informationSheetScroll] setContentSize: contentSize];
-        [self addInformationSheetAtPoint: CGPointMake(CGRectGetMaxX(lastSubviewFrame), lastSubviewFrame.origin.y) 
-                                WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: 86400]];
-    } else if ([[self informationSheetScroll] contentOffset].x < 0) {
-        NSLog(@"Went left.");
-        CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count] + 4), lastSubviewFrame.size.height};
-        [[self informationSheetScroll] setContentSize: contentSize];
-//        CGRect test = [[self informationSheetScroll] bounds];
-//        NSLog(@"width is: %f", [[self informationSheetScroll] contentSize].width);
-//        CGRect informationRect = {{[[self informationSheetScroll] contentSize].width - 
-//                                   [[self informationSheet] frame].size.width, 
-//                                                 [[self informationSheet] frame].origin.y},
-//                                                 [[self informationSheet] frame].size};
-////        [[self informationSheet] setFrame: informationRect];
-        CGPoint infSheetPoint = {-[[self informationSheet] frame].size.width, [[self informationSheet] frame].origin.y};
-        [self addInformationSheetAtPoint: infSheetPoint WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: -86400]];
+    //That's for determine where last sheet lays: on the left or on the right side.
+    int lastSheetSubMainSheet = [[self informationSheet] center].x - [[[self informationSheets] lastObject] center].x;
+//    NSLog(@"\nInfSheet x is: %f\ lastSheet x is% f", )
+    if ([[self informationSheetScroll] contentOffset].x < 0) {
+        if (([[self informationSheetScroll] contentOffset].x < [[[self informationSheets] lastObject] frame].origin.x) && (lastSheetSubMainSheet >= 0)) {
+            if ([self tag] == 5) return;
+            NSLog(@"\noffset is: %f\nlastX is: %f\n", [[self informationSheetScroll] contentOffset].x, [[[self informationSheets] lastObject] frame].origin.x);
+            CGPoint scrollContentOffset = {CGRectGetMaxX([[[self informationSheets] lastObject] frame]), [[[self informationSheets] lastObject] frame].origin.y};
+            CGRect lastSheetFrame = [[[self informationSheets] lastObject] frame];
+            lastSheetFrame.origin = scrollContentOffset;
+            CGRect scrollBounds = [[self informationSheetScroll] bounds];
+            scrollBounds.origin = scrollContentOffset;
+            CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count]), lastSubviewFrame.size.height};
+            
+            [[self informationSheetScroll] setContentSize: contentSize];
+            [[self informationSheetScroll] setBounds: scrollBounds];
+            [[[self informationSheets] lastObject] setFrame: lastSheetFrame];
+            CGPoint newPoint = {[[[self informationSheets] lastObject] frame].origin.x - [[informationSheets lastObject] frame].size.width, 
+                                [[[self informationSheets] lastObject] frame].origin.y};
+            [self addInformationSheetAtPoint: newPoint WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: -86400]];
+            [self setTag: [self tag] + 1];
+        }
+    } else if ([[self informationSheetScroll] contentOffset].x > 0) {
+        if (([[self informationSheetScroll] contentOffset].x > [[[self informationSheets] lastObject] frame].origin.x) && (lastSheetSubMainSheet <= 0)) {
+            NSLog(@"Went right");
+            CGSize contentSize = {lastSubviewFrame.size.width * ([[self informationSheets] count] + 1), lastSubviewFrame.size.height};
+            [[self informationSheetScroll] setContentSize: contentSize];
+            [self addInformationSheetAtPoint: CGPointMake(CGRectGetMaxX(lastSubviewFrame), lastSubviewFrame.origin.y) 
+                                    WithDate: [[[[self informationSheets] lastObject] targetDate] dateByAddingTimeInterval: 86400]];
+        }
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
 //    NSLog(@"We are in: %s", __FUNCTION__);
+//    NSLog(@"Scroll bounds are: ((%f; %f), (%f; %f))", 
+//          [[self informationSheetScroll] bounds].origin.x, 
+//          [[self informationSheetScroll] bounds].origin.y, 
+//          [[self informationSheetScroll] bounds].size.width, 
+//          [[self informationSheetScroll] bounds].size.height);
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -219,6 +257,7 @@
 //    [[self informationSheetScroll] setContentSize: contentSize];
     return;
 }
+
 
 - (void) showOnlyVisibleSheetOnScrollView: (UIScrollView*) scrollView animated: (BOOL) animated
 {

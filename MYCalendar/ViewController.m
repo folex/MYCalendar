@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DayView.h"
+#import "TaskDetailedView.h"
 #import "Event.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
@@ -19,6 +20,7 @@
 
 @implementation ViewController
 @synthesize fetchedResultsController;
+@synthesize popover;
 
 - (void)viewDidLoad
 {
@@ -54,11 +56,21 @@
 //            NSLog(@"Something went wrong while saving context. %@", error);
 //        }
 //    }
+    
+    //That's for popover resizing: popover can't be reached from it's contentViewController, damn it. So I need this. Yack.
+    [(AppDelegate*)[[UIApplication sharedApplication] delegate] setCalendarViewController: self];
+    
     UINib *test = [UINib nibWithNibName: @"DayView" bundle: nil];
     DayView *nya = [[test instantiateWithOwner: self options: nil] objectAtIndex: 0];
     //    [[nya layer] setBorderWidth: 10];
-    [[self view] addSubview: nya];
     [nya setTargetDate: [NSDate date]];
+    UINib *taskDetailedView = [UINib nibWithNibName: @"TaskDetailedView" bundle: nil];
+    TaskDetailedView *detView = [[taskDetailedView instantiateWithOwner: self options: nil] objectAtIndex: 0];
+    CGRect detRect = {{0, CGRectGetMaxY([nya frame])}, [detView frame].size};
+    [detView setFrame: detRect];
+    [[self view] addSubview: detView];
+    [[self view] addSubview: nya];
+    
 }
 
 - (void)viewDidUnload
